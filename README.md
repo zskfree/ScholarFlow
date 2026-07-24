@@ -1,352 +1,206 @@
-# ScholarFlow - 文献综述自动化工具
-
 <div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)
-![Flask](https://img.shields.io/badge/Flask-3.0+-green.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![ScholarFlow Banner](assets/readme/hero.svg)
 
-**基于大语言模型的智能文献综述系统**
+<br/>
 
-一站式解决文献处理、内容提取、智能总结与引用匹配的学术工具
+[![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Flask](https://img.shields.io/badge/Flask-3.0+-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![LLM Support](https://img.shields.io/badge/LLM-Gemini%20%7C%20GLM--4%20%7C%20GPT--4o-8B5CF6?style=for-the-badge&logo=openai&logoColor=white)](#-多模型生态矩阵)
+[![License](https://img.shields.io/badge/License-MIT-10B981?style=for-the-badge)](LICENSE)
+
+<br/>
+
+**ScholarFlow** 是一款专为学术研究人员、研究生和科研团队打造的 **AI 驱动文献综述自动化处理系统**。<br/>
+通过结合 OCR 视觉解析、多 LLM 并发总结与文献引用匹配算法，实现从 PDF 到结构化综述报告的全流程自动化。
+
+[快速开始](#-快速开始) • [核心特性](#-核心特性) • [系统架构](#-系统架构) • [模型矩阵](#-多模型生态矩阵) • [常见问题](#-常见问题与排障)
 
 </div>
 
 ---
 
-## 📚 项目简介
+## ✨ 核心特性
 
-ScholarFlow 是一个强大的 AI 驱动文献综述自动化工具，专为学术研究人员、研究生和科研工作者设计。通过集成先进的大语言模型（LLM），该系统能够：
-
-- 🔍 **智能解析**：自动处理 PDF 文献（包括扫描件 OCR 识别）
-- 🤖 **AI 总结**：基于研究主题提取核心观点和关键信息
-- 🔗 **引用匹配**：自动将文献与参考文献列表进行精准关联
-- 📊 **结果导出**：生成结构化的 CSV/JSON 报告
-- 🎯 **多模型支持**：灵活切换 Gemini、智谱AI、OpenAI 等主流模型
-- 🌐 **Web 界面**：提供直观的可视化操作面板和实时进度显示
-
-## 📂 项目结构
-
-```text
-ScholarFlow/
-├── new_workflow/
-│   ├── app.py                      # 🌐 Flask Web 应用入口
-│   ├── workflow.py                 # 🖥️  命令行工作流入口
-│   ├── config.yaml                 # ⚙️  用户配置文件（需从示例创建）
-│   ├── config example.yaml         # 📋 配置文件模板
-│   ├── src/                        # 📦 核心功能模块
-│   │   ├── config_loader.py        #   配置加载器（支持缓存）
-│   │   ├── pdf_processor.py        #   PDF 文件处理
-│   │   ├── pdf_to_markdown.py      #   PDF 转 Markdown（OCR 支持）
-│   │   ├── llm_client.py           #   统一 LLM 客户端（支持多提供商）
-│   │   ├── summary_generator.py    #   文献总结生成器（并发处理）
-│   │   ├── reference_matcher.py    #   参考文献智能匹配
-│   │   ├── results_exporter.py     #   结果导出（CSV/JSON）
-│   │   ├── task_manager.py         #   任务管理器（SSE 实时推送）
-│   │   ├── logger.py               #   日志系统
-│   │   ├── utils.py                #   工具函数
-│   │   └── prompts.py              #   LLM 提示词模板
-│   ├── templates/                  # 🎨 Web 界面模板
-│   │   ├── index.html              #   主页面
-│   │   └── settings.html           #   设置页面
-│   ├── static/                     # 🎭 静态资源
-│   │   ├── css/style.css           #   样式文件
-│   │   └── js/main.js              #   前端脚本
-│   ├── gemini_web/                 # 🔌 Gemini Web API 集成
-│   ├── logs/                       # 📝 运行日志
-│   ├── pdfs/                       # 📄 PDF 文件存储目录
-│   └── txts/                       # 📂 输入输出文本
-│       ├── 研究主题.txt
-│       ├── 参考文献列表.txt
-│       ├── literature_summary.json  # 总结结果（JSON）
-│       ├── reference_mapping.json   # 映射关系
-│       └── summary_sorted.csv       # 最终报告（CSV）
-├── requirements.txt                # 📦 项目依赖
-└── README.md                       # 📖 项目文档
-```
-
-## 🚀 快速开始
-
-### 1️⃣ 安装依赖
-
-**环境要求：** Python 3.12+
-
-```bash
-# 克隆项目
-git clone https://github.com/yourusername/ScholarFlow.git
-cd ScholarFlow
-
-# 安装依赖包
-pip install -r requirements.txt
-```
-
-> **提示：** 建议使用虚拟环境 `python -m venv venv`
+| 核心功能 | 功能描述 | 技术亮点 |
+| :--- | :--- | :--- |
+| **🔍 智能文献解析** | 自动读取与解析 PDF 文献，支持扫描件与图片型 PDF | 集成微软 `MarkItDown` 引擎与视觉 LLM OCR |
+| **🤖 深度 AI 总结** | 针对研究主题自动萃取研究问题、研究方法、结论与创新点 | 多线程并发分发，支持 Prompt 自定义扩展 |
+| **🔗 引用精准匹配** | 自动分析论文文件名与参考文献列表，建立精准关联映射 | 语义匹配算法，自动纠错与置信度校验 |
+| **📊 多格式结构输出** | 自动生成包含全量要素的综述表格与关系映射集 | 支持导出为 Excel 可直接查看的 CSV 和 JSON |
+| **🌐 Web 实时可视化** | 提供直观优雅的浏览器工作台与实时处理状态观察 | 采用 Server-Sent Events (SSE) 实时推送进度 |
+| **🔄 增强容错机制** | 断点续传、配置缓存、健康检查与请求自动重试 | 避开重复请求，极大地降低 API Token 开销 |
 
 ---
 
-### 2️⃣ 配置环境
+## ⚡ 系统架构
 
-**创建配置文件：**
+ScholarFlow 采用了高度模块化与高并发的四阶段流式处理架构：
+
+![ScholarFlow Architecture](assets/readme/architecture.svg)
+
+1. **解析阶段**：递归扫描指定目录下的 PDF 文本与图片，调用 OCR 提取清晰文本。
+2. **提取阶段**：通过配置的并发 Worker（如 `max_workers=3`）分派大语言模型抽取学术核心四要素。
+3. **匹配阶段**：精准对齐论文与参考文献文本库，自动处理断点续传。
+4. **交付阶段**：同步向 Web 界面推送日志，自动导出 `summary_sorted.csv` 报告。
+
+---
+
+## 🚀 快速开始
+
+### 1. 环境准备
+
+需要安装 Python 3.12+ 运行环境：
+
+```bash
+# 克隆项目仓库
+git clone https://github.com/yourusername/ScholarFlow.git
+cd ScholarFlow
+
+# 使用 uv（推荐）或 pip 安装依赖
+pip install -r requirements.txt
+```
+
+### 2. 配置密钥与参数
+
+从模板创建配置文件：
 
 ```bash
 # Windows
 copy "new_workflow\config example.yaml" "new_workflow\config.yaml"
 
-# Linux/macOS
+# Linux / macOS
 cp "new_workflow/config example.yaml" "new_workflow/config.yaml"
 ```
 
-**编辑 `config.yaml`，配置以下关键参数：**
+编辑 `new_workflow/config.yaml`，填入您的 API 密钥与偏好配置：
 
 ```yaml
 api:
-  provider: gemini_web  # 选择提供商: gemini | gemini_web | openai | zhipu
-  
-  # 根据选择的提供商配置相应的密钥
-  genai_key: "your-gemini-api-key"        # Gemini API
-  zhipu_key: "your-zhipu-api-key"         # 智谱AI
-  openai_key: "your-openai-api-key"       # OpenAI/OpenRouter
+  provider: gemini_web  # 支持: gemini | gemini_web | zhipu | openai
+  genai_key: "YOUR_GEMINI_API_KEY"
+  zhipu_key: "YOUR_ZHIPU_API_KEY"
+  openai_key: "YOUR_OPENAI_API_KEY"
 
 proxy:
-  url: "http://127.0.0.1:7897"  # 代理设置（可选）
+  url: "http://127.0.0.1:10808"  # 可选：代理服务器地址
 
 concurrency:
-  max_workers: 3  # 并发处理数（建议 1-5）
+  max_workers: 3  # 并发任务数 (建议 1-5)
 ```
 
----
+### 3. 启动应用
 
-### 3️⃣ 准备输入数据
-
-**方式 A：通过 Web 界面上传**（推荐）  
-启动应用后直接在页面上传 PDF 和输入信息
-
-**方式 B：手动准备文件**
-
-```bash
-# 1. 放置 PDF 文件
-cp your_papers/*.pdf new_workflow/pdfs/
-
-# 2. 编辑研究主题
-echo "您的研究主题" > new_workflow/txts/研究主题.txt
-
-# 3. 添加参考文献列表（每行一条）
-cat > new_workflow/txts/参考文献列表.txt << EOF
-张三, 李四. 论文标题[J]. 期刊名, 2024, 10(2): 1-10.
-Smith J, Doe J. Article Title[J]. Journal Name, 2024, 15(3): 20-30.
-EOF
-```
-
----
-
-### 4️⃣ 运行应用
-
-#### 🌐 方式 A：Web 界面（推荐）
+#### 🌐 方式 A：Web 可视化工作台（推荐）
 
 ```bash
 cd new_workflow
 python app.py
 ```
+启动完成后，在浏览器中打开：**`http://127.0.0.1:18690`**
 
-✅ 启动成功后访问：**<http://127.0.0.1:18690>**
+- 🎨 **一键拖拽** 上传 PDF 文献与参考文献文本
+- 📊 **实时观察** SSE 节点处理流与日志输出
+- ⚙️ **在线修改** 配置参数并即时保存
+- 📥 **在线预览与一键下载** 生成好的 CSV/JSON 报告
 
-**功能特点：**
+#### 🖥️ 方式 B：CLI 命令行批处理
 
-- 📊 实时进度显示（SSE 推送）
-- 🎨 可视化界面操作
-- ⚙️ 在线配置管理
-- 📥 一键下载结果
-
-#### 🖥️ 方式 B：命令行脚本
-
-适合自动化批处理和脚本集成
+适合集成至自动化脚本或无界面服务器：
 
 ```bash
 cd new_workflow
 python workflow.py
 ```
 
-**输出位置：**
+产出文件默认存放在 `new_workflow/txts/` 目录：
+- `summary_sorted.csv` - 结构化文献综述表
+- `literature_summary.json` - 详细文献提取 JSON
+- `reference_mapping.json` - 引用匹配图谱 JSON
 
-- `txts/literature_summary.json` - 完整总结数据
-- `txts/reference_mapping.json` - 文献映射关系
-- `txts/summary_sorted.csv` - 最终报告（可用 Excel 打开）
+---
 
-## ✨ 核心特性
+## 🤖 多模型生态矩阵
 
-### 🧠 智能文献处理
+ScholarFlow 完美适配国内外主流大语言模型，您可以根据成本与网络状况自由切换：
 
-- **全格式支持**：集成 `markitdown` + LLM 视觉能力，完美处理文本PDF和扫描件
-- **OCR 识别**：自动识别图片型PDF内容
-- **递归扫描**：支持子目录批量处理
+| 提供商 | 默认模型 | 适用场景 / 特性优势 | 推荐并发数 |
+| :--- | :--- | :--- | :---: |
+| **Gemini Web** | `gemini-web` | **完全免费**，基于 Cookie，适合大批量文献处理 | `1 - 3` |
+| **Gemini API** | `gemini-2.0-flash-exp` | 响应速度快，性价比高，原生支持视觉 OCR | `3 - 5` |
+| **智谱 AI** | `glm-4-flash` / `glm-4v` | **国内访问稳定**，无需代理，支持扫描件视觉识别 | `3 - 5` |
+| **OpenAI** | `gpt-4o-mini` | 逻辑推导强，可通过 OpenRouter 灵活切换 | `2 - 5` |
 
-### 🤖 多模型生态
+---
 
-| 提供商 | 模型示例 | 特点 |
-|--------|---------|------|
-| **Gemini** | `gemini-2.0-flash-exp` | 官方API，速度快 |
-| **Gemini Web** | 免费使用 | 基于Cookie，支持图片生成 |
-| **智谱AI** | `glm-4-flash` | 国内稳定，支持思维链 |
-| **OpenAI** | `gpt-4o-mini` | 通过 OpenRouter 支持 |
+## 📂 项目结构概览
 
-### 📊 工作流程
-
-```mermaid
-graph LR
-    A[上传PDF] --> B[智能解析]
-    B --> C[AI总结]
-    C --> D[引用匹配]
-    D --> E[导出报告]
+```text
+ScholarFlow/
+├── assets/
+│   └── readme/                      # 🎨 README 视觉 SVG 资源库
+│       ├── hero.svg                 #   Hero 头部品牌横幅
+│       └── architecture.svg         #   系统处理流程图
+├── new_workflow/
+│   ├── app.py                       # 🌐 Flask Web 应用服务入口
+│   ├── workflow.py                  # 🖥️ CLI 命令行自动化入口
+│   ├── config example.yaml          # 📋 配置文件参考模板
+│   ├── src/                         # 📦 核心功能引擎
+│   │   ├── pdf_processor.py         #   PDF 文件读写与校验
+│   │   ├── pdf_to_markdown.py       #   PDF 转 Markdown (MarkItDown / OCR)
+│   │   ├── llm_client.py            #   统一 LLM API 客户端封装
+│   │   ├── summary_generator.py     #   多线程文献总结提取器
+│   │   ├── reference_matcher.py     #   参考文献智能精准匹配器
+│   │   ├── task_manager.py          #   任务进度与 SSE 推送服务
+│   │   └── results_exporter.py      #   CSV / JSON 结构化导出工具
+│   ├── templates/                   # 🎨 Web 界面 HTML 模板
+│   └── static/                      # 🎭 前端 CSS / JS 静态资源
+├── requirements.txt                 # 📦 项目 Python 依赖清单
+└── README.md                        # 📖 项目主文档
 ```
 
-1. **文献映射**：AI 自动分析文件名和参考文献，建立对应关系
-2. **并发处理**：多线程同时处理多篇文献（可配置并发数）
-3. **实时反馈**：SSE 推送处理进度，掌握每一步状态
-4. **结构化输出**：生成包含研究问题、方法、结论等要素的总结
-
-### 🎯 高级功能
-
-- ✅ **断点续传**：自动跳过已处理文献，支持增量更新
-- ✅ **配置缓存**：优化性能，减少重复读取
-- ✅ **健康检查**：`/health` 端点监控服务状态
-- ✅ **日志系统**：详细记录每次运行情况
-- ✅ **异常重试**：自动重试失败的请求（可配置次数）
-
 ---
 
-## 📖 使用场景
-
-- 📚 **文献综述撰写**：快速提取多篇论文的核心观点
-- 🔬 **课题调研**：系统整理相关研究进展
-- 📝 **论文写作**：自动生成参考文献总结
-- 🎓 **研究生学习**：高效阅读和管理文献
-
----
-
-## ⚙️ 配置说明
-
-### LLM 提供商选择建议
-
-**免费方案：**
-
-- `gemini_web`（推荐）：免费但需要 Google 账号 Cookie
-
-**付费方案：**
-
-- `gemini`：速度最快，价格合理
-- `zhipu`：国内访问稳定
-- `openai`：通过 OpenRouter 访问多种模型
-
-### 并发配置
-
-```yaml
-concurrency:
-  max_workers: 3  # 并发数建议
-```
-
-**推荐设置：**
-
-- API 限制较严格：`1-2`
-- 一般情况：`3-5`
-- 付费用户：`5-10`
-
----
-
-## ⚠️ 注意事项
-
-### API 密钥安全
-
-- 🔒 不要将 `config.yaml` 提交到版本控制系统
-- 🔒 使用 `.gitignore` 排除敏感文件
-- 🔒 定期轮换 API 密钥
-
-### 模型选择
-
-- 📷 扫描件PDF需要支持视觉的模型：`gemini-2.0-flash-exp`、`glm-4v`
-- 💰 注意 API 计费：建议先用小数据测试
-- 🌍 国内访问建议配置代理或使用智谱AI
-
-### 性能优化
-
-- ⚡ 合理设置并发数，避免触发频率限制
-- 💾 大批量处理建议分批执行
-- 🔄 使用断点续传功能，避免重复处理
-
----
-
-## 🐛 常见问题
+## 🐛 常见问题与排障
 
 <details>
-<summary><b>Q: 智谱AI 初始化失败？</b></summary>
+<summary><b>Q: 扫描件 PDF 无法正常识别文字？</b></summary>
+<br/>
 
-确保已正确安装依赖：
-
-```bash
-pip install zhipuai
-```
+针对图片型扫描件 PDF，系统会自动调用视觉模型进行 OCR 处理。请确保在 `config.yaml` 中选择支持 Vision 的模型（如 `gemini-2.0-flash-exp` 或 `glm-4v`），并确保 `markitdown` 依赖已正确安装。
 
 </details>
 
 <details>
-<summary><b>Q: Gemini Web API 连接超时？</b></summary>
+<summary><b>Q: 出现 API 速率限制 (Rate Limit Exceeded) 怎么办？</b></summary>
+<br/>
 
-1. 检查 Cookie 是否过期（重新获取）
-2. 配置代理：`proxy.url: "http://127.0.0.1:7890"`
-3. 增加超时时间
-
-</details>
-
-<details>
-<summary><b>Q: PDF 解析失败？</b></summary>
-
-- 检查 PDF 是否损坏
-- 扫描件需要支持视觉的模型
-- 查看 `logs/` 目录下的详细日志
+1. 降低 `config.yaml` 中的 `concurrency.max_workers` 并发数值（设为 `1` 或 `2`）。
+2. 使用系统自带的**断点续传**功能：重启任务时，系统会自动跳过已成功生成的文献，无需重复消耗 Token。
 
 </details>
 
 <details>
-<summary><b>Q: 如何更改端口？</b></summary>
+<summary><b>Q: 智谱 AI 或 OpenAI 提示 key 错误？</b></summary>
+<br/>
 
-编辑 `app.py`：
-
-```python
-app.run(debug=False, port=你的端口)
-```
+请检查 `config.yaml` 中 `api.provider` 字段是否与配置的 key 名称一致（例如设置 provider 为 `zhipu` 时需填入 `zhipu_key`）。
 
 </details>
 
 ---
 
-## 🤝 贡献指南
+## 🤝 贡献与许可
 
-欢迎提交 Issue 和 Pull Request！
+欢迎提交 Issue 和 Pull Request 来完善 ScholarFlow！
 
-1. Fork 本项目
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
+- 本项目采用 [MIT License](LICENSE) 开源许可。
+- 致谢：[Flask](https://flask.palletsprojects.com/) | [MarkItDown](https://github.com/microsoft/markitdown) | [Google Gemini](https://ai.google.dev/) | [智谱 AI](https://open.bigmodel.cn/)
 
----
-
-## 📄 许可证
-
-MIT License - 详见 [LICENSE](LICENSE) 文件
-
----
-
-## 🙏 致谢
-
-- [Flask](https://flask.palletsprojects.com/) - Web 框架
-- [MarkItDown](https://github.com/microsoft/markitdown) - PDF 转换
-- [Gemini](https://ai.google.dev/) - Google AI
-- [智谱AI](https://open.bigmodel.cn/) - 国产大模型
-
----
+<br/>
 
 <div align="center">
 
-**⭐ 如果这个项目对您有帮助，请给一个 Star！**
+**⭐ 如果 ScholarFlow 对您的科研与学习有所帮助，欢迎点个 Star 支持一下！**
 
 </div>

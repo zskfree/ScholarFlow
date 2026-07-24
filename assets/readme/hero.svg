@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 480" width="100%" height="auto">
+  <title>ScholarFlow Hero Banner</title>
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B0F19" />
+      <stop offset="50%" stop-color="#111827" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <!-- Brand Accent Gradient -->
+    <linearGradient id="brand-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366F1" />
+      <stop offset="50%" stop-color="#3B82F6" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+
+    <!-- Card Background Gradient -->
+    <linearGradient id="card-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0.9" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow-indigo" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="25" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-emerald" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="20" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Subtle Grid Pattern -->
+    <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#334155" stroke-width="1" stroke-opacity="0.25" />
+    </pattern>
+  </defs>
+
+  <!-- Base Canvas -->
+  <rect width="1200" height="480" rx="20" fill="url(#bg-grad)" stroke="#1E293B" stroke-width="2" />
+  
+  <!-- Overlay Pattern -->
+  <rect width="1200" height="480" rx="20" fill="url(#grid-pattern)" />
+
+  <!-- Glowing Orbs in Background -->
+  <circle cx="150" cy="100" r="140" fill="#6366F1" opacity="0.15" filter="url(#glow-indigo)" />
+  <circle cx="1050" cy="380" r="160" fill="#10B981" opacity="0.12" filter="url(#glow-emerald)" />
+
+  <!-- ================= LEFT COLUMN: BRANDING & TITLE ================= -->
+  <g transform="translate(70, 75)">
+    <!-- Badge -->
+    <rect x="0" y="0" width="195" height="32" rx="16" fill="#1E1B4B" stroke="#4338CA" stroke-width="1" />
+    <circle cx="16" cy="16" r="5" fill="#10B981" />
+    <text x="30" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="600" fill="#818CF8" letter-spacing="0.5">SCHOLARFLOW v2.0</text>
+
+    <!-- Main Title -->
+    <text x="0" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="52" font-weight="800" fill="url(#brand-grad)" letter-spacing="-1">ScholarFlow</text>
+
+    <!-- Tagline -->
+    <text x="0" y="132" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="600" fill="#F8FAFC">基于 LLM 的智能文献综述自动化系统</text>
+
+    <!-- Description -->
+    <text x="0" y="168" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="15" fill="#94A3B8" width="460">
+      <tspan x="0" dy="0">一站式解决学术 PDF 解析、OCR 扫描提取、多大模型智能总结、</tspan>
+      <tspan x="0" dy="24">精准参考文献引用关联与结构化报告导出。</tspan>
+    </text>
+
+    <!-- Feature Pills -->
+    <g transform="translate(0, 220)">
+      <!-- Pill 1 -->
+      <rect x="0" y="0" width="138" height="36" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1" />
+      <text x="14" y="23" font-family="sans-serif" font-size="13" fill="#E2E8F0" font-weight="500">🔍 OCR 智能解析</text>
+
+      <!-- Pill 2 -->
+      <rect x="148" y="0" width="138" height="36" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1" />
+      <text x="162" y="23" font-family="sans-serif" font-size="13" fill="#E2E8F0" font-weight="500">🤖 多 LLM 协同</text>
+
+      <!-- Pill 3 -->
+      <rect x="296" y="0" width="148" height="36" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1" />
+      <text x="310" y="23" font-family="sans-serif" font-size="13" fill="#E2E8F0" font-weight="500">🔗 引用精准匹配</text>
+    </g>
+
+    <!-- CTA / Web Access Tag -->
+    <g transform="translate(0, 280)">
+      <rect x="0" y="0" width="220" height="42" rx="10" fill="#2563EB" />
+      <text x="24" y="26" font-family="sans-serif" font-size="14" font-weight="700" fill="#FFFFFF">🌐 Web 可视化工作台</text>
+
+      <rect x="232" y="0" width="180" height="42" rx="10" fill="#0F172A" stroke="#3B82F6" stroke-width="1.5" />
+      <text x="250" y="26" font-family="monospace" font-size="13" font-weight="600" fill="#60A5FA">http://127.0.0.1:18690</text>
+    </g>
+  </g>
+
+  <!-- ================= RIGHT COLUMN: INTERACTIVE VISUAL BOARD ================= -->
+  <g transform="translate(590, 60)">
+    <!-- Dashboard Card Container -->
+    <rect x="0" y="0" width="540" height="360" rx="16" fill="url(#card-grad)" stroke="#334155" stroke-width="1.5" filter="drop-shadow(0 20px 30px rgba(0,0,0,0.5))" />
+
+    <!-- Window Header / Controls -->
+    <path d="M 0 16 A 16 16 0 0 1 16 0 L 524 0 A 16 16 0 0 1 540 16 L 540 40 L 0 40 Z" fill="#0F172A" />
+    <circle cx="24" cy="20" r="6" fill="#EF4444" />
+    <circle cx="42" cy="20" r="6" fill="#F59E0B" />
+    <circle cx="60" cy="20" r="6" fill="#10B981" />
+    <text x="270" y="24" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#64748B" font-weight="600">ScholarFlow Web Dashboard — Realtime SSE Stream</text>
+    <line x1="0" y1="40" x2="540" y2="40" stroke="#1E293B" stroke-width="1" />
+
+    <!-- Stage 1: Document Processing -->
+    <g transform="translate(24, 60)">
+      <rect x="0" y="0" width="150" height="120" rx="10" fill="#0F172A" stroke="#3B82F6" stroke-width="1" />
+      <text x="14" y="26" font-family="sans-serif" font-size="12" font-weight="700" fill="#93C5FD">📄 文献解析器</text>
+      
+      <rect x="14" y="40" width="122" height="18" rx="4" fill="#1E293B" />
+      <text x="20" y="53" font-family="monospace" font-size="10" fill="#A7F3D0">✓ OCR Scan (MarkItDown)</text>
+
+      <rect x="14" y="66" width="122" height="18" rx="4" fill="#1E293B" />
+      <text x="20" y="79" font-family="monospace" font-size="10" fill="#CBD5E1">✓ Layout Extraction</text>
+
+      <rect x="14" y="92" width="80" height="12" rx="3" fill="#2563EB" opacity="0.4" />
+      <rect x="14" y="92" width="60" height="12" rx="3" fill="#3B82F6" />
+      <text x="100" y="102" font-family="monospace" font-size="9" fill="#60A5FA">85%</text>
+    </g>
+
+    <!-- Arrow 1 -->
+    <path d="M 182 120 L 202 120" stroke="#6366F1" stroke-width="2" stroke-dasharray="4 3" />
+    <polygon points="202,116 210,120 202,124" fill="#6366F1" />
+
+    <!-- Stage 2: Multi-LLM Engine -->
+    <g transform="translate(215, 60)">
+      <rect x="0" y="0" width="155" height="120" rx="10" fill="#0F172A" stroke="#6366F1" stroke-width="1.5" />
+      <text x="14" y="26" font-family="sans-serif" font-size="12" font-weight="700" fill="#C7D2FE">🤖 大模型智能提取</text>
+
+      <g transform="translate(14, 38)">
+        <rect x="0" y="0" width="127" height="20" rx="4" fill="#312E81" />
+        <text x="8" y="14" font-family="sans-serif" font-size="10" fill="#EEF2FF" font-weight="600">Gemini 2.0 Flash / Web</text>
+      </g>
+      <g transform="translate(14, 63)">
+        <rect x="0" y="0" width="127" height="20" rx="4" fill="#1E1B4B" />
+        <text x="8" y="14" font-family="sans-serif" font-size="10" fill="#C7D2FE">智谱 GLM-4 / OpenAI</text>
+      </g>
+      <g transform="translate(14, 88)">
+        <text x="0" y="14" font-family="sans-serif" font-size="10" fill="#10B981">⚡ 并发支持: max_workers=3</text>
+      </g>
+    </g>
+
+    <!-- Arrow 2 -->
+    <path d="M 378 120 L 398 120" stroke="#10B981" stroke-width="2" stroke-dasharray="4 3" />
+    <polygon points="398,116 406,120 398,124" fill="#10B981" />
+
+    <!-- Stage 3: Smart Output -->
+    <g transform="translate(410, 60)">
+      <rect x="0" y="0" width="110" height="120" rx="10" fill="#0F172A" stroke="#10B981" stroke-width="1" />
+      <text x="10" y="26" font-family="sans-serif" font-size="11" font-weight="700" fill="#A7F3D0">📊 结构化产出</text>
+
+      <rect x="10" y="42" width="90" height="20" rx="4" fill="#064E3B" />
+      <text x="16" y="56" font-family="monospace" font-size="9" fill="#34D399">summary.csv</text>
+
+      <rect x="10" y="68" width="90" height="20" rx="4" fill="#064E3B" />
+      <text x="16" y="82" font-family="monospace" font-size="9" fill="#34D399">mapping.json</text>
+
+      <rect x="10" y="94" width="90" height="16" rx="4" fill="#1E293B" />
+      <text x="16" y="106" font-family="sans-serif" font-size="9" fill="#94A3B8">引用精准核对</text>
+    </g>
+
+    <!-- Bottom Log Monitor Area -->
+    <g transform="translate(24, 200)">
+      <rect x="0" y="0" width="496" height="140" rx="8" fill="#090D16" stroke="#1E293B" stroke-width="1" />
+      <text x="14" y="22" font-family="monospace" font-size="11" font-weight="700" fill="#38BDF8">> ScholarFlow Core Engine Logging...</text>
+      
+      <text x="14" y="44" font-family="monospace" font-size="11" fill="#4ADE80">[INFO] 15:31:02 Loaded 12 papers from /pdfs (OCR engine ready)</text>
+      <text x="14" y="64" font-family="monospace" font-size="11" fill="#818CF8">[LLM]  15:31:05 Processing: Deep Learning in Bio-Medicine.pdf</text>
+      <text x="14" y="84" font-family="monospace" font-size="11" fill="#FBBF24">[MATCH] 15:31:09 Matched 18 citations with accuracy score 98.6%</text>
+      <text x="14" y="104" font-family="monospace" font-size="11" fill="#34D399">[SUCCESS] Generated summary_sorted.csv &amp; JSON reports.</text>
+      
+      <!-- Blinking Cursor -->
+      <rect x="425" y="94" width="8" height="12" fill="#38BDF8" />
+    </g>
+  </g>
+</svg>
